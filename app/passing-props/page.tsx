@@ -1,4 +1,5 @@
 import Avatar2 from "../components/avatar-2";
+import Card from "../components/card";
 import Profile2 from "../components/profile-2";
 
 export default function PassingProps() {
@@ -13,6 +14,11 @@ export default function PassingProps() {
       <br />
       <h2>Passing all props</h2>
       <Profile2 person={{ name: 'Katsuko Saruhashi', imageId: 'OKS67lh' }} size={80} />
+      <br />
+      <h2 className="mb-2">Passing JSX children</h2>
+      <Card>
+        <Avatar2 person={{ name: 'Katsuko Saruhashi', imageId: 'OKS67lh' }} size={50} />
+      </Card>
     </div>
   );
 }
