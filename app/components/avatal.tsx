@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function Avatal() {
+export default function Avatar() {
   const avatar = "https://i.imgur.com/7vQD0fPs.jpg";
   const name = "Gregorio Y. Zara";
   return (

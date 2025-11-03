@@ -1,5 +1,6 @@
 import Gallery from "../components/gallery";
 import Avatal from "../components/avatal";
+import ToDoList from "../components/to-do-list";
 
 export default function YourFirstComponent() {
   return (
@@ -9,6 +10,9 @@ export default function YourFirstComponent() {
       <br/>
       <h1 className="mb-2">Avatar</h1>
       <Avatal />
+      <br/>
+      <h1 className="mb-2">To Do List</h1>
+      <ToDoList />
     </>
   );
 }
