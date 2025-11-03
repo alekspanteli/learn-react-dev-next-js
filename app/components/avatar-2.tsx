@@ -8,10 +8,10 @@ type Person = {
 
 type Avatar2Props = {
   person: Person;
-  size: 50 | 80 | 100;
+  size?: 50 | 80 | 100;
 };
 
-export default function Avatar2({ person, size }: Avatar2Props) {
+export default function Avatar2({ person, size = 80 }: Avatar2Props) {
   return (
     <div>
       <Image
