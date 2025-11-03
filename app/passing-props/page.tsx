@@ -12,7 +12,7 @@ export default function PassingProps() {
       </div>
       <br />
       <h2>Passing all props</h2>
-      <Profile2 person={{ name: 'Katsuko Saruhashi', imageId: 'OKS67lh' }} />
+      <Profile2 person={{ name: 'Katsuko Saruhashi', imageId: 'OKS67lh' }} size={80} />
     </div>
   );
 }
