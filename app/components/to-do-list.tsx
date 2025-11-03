@@ -1,4 +1,4 @@
-import Avatar from "./avatal";
+import Avatar from "./avatar";
 
 const person = {
   name: "Gregorio Y. Zara",

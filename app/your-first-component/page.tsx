@@ -1,5 +1,5 @@
 import Gallery from "../components/gallery";
-import Avatal from "../components/avatal";
+import Avatal from "../components/avatar";
 import ToDoList from "../components/to-do-list";
 
 export default function YourFirstComponent() {
