@@ -1,37 +1,30 @@
-type Drink = 'tea' | 'coffee' | 'soda';
-
-type DrinkInfo = {
-  name: string;
-  price: number;
-  description: string;
-};
-
-const drinks = new Map<Drink, DrinkInfo>([
-  ['tea', {
+const drinks = {
+  tea: {
     name: 'Green Tea',
     price: 1.00,
     description: 'A refreshing cup of green tea',
-  }],
-  ['coffee', {
+  },
+  coffee: {
     name: 'Coffee',
     price: 1.50,
     description: 'A cup of coffee',
-  }],
-  ['soda', {
+  },
+  soda: {
     name: 'Soda',
     price: 1.00,
     description: 'A refreshing soda',
-  }],
-]);
+  },
+}
+
+
+type Drink = keyof typeof drinks;
 
 type props = {
   drink: Drink;
 }
 
 function Drink({drink}: props){
-  const info = drinks.get(drink);
-  if (!info) return null;
-  
+  const info = drinks[drink];
   return (
     <div className="mb-4 p-4 border border-gray-300 rounded">
       <h2 className="text-xl font-bold">{info.name}</h2>
@@ -44,9 +37,9 @@ function Drink({drink}: props){
 export default function Home() {
   return (
     <div className="container mx-auto p-4">
-      {Array.from(drinks.keys()).map((drink) => (
-        <Drink key={drink} drink={drink} />
-      ))}
+      <Drink drink="tea"/>
+      <Drink drink="coffee"/>
+      <Drink drink="soda"/>
     </div>
   );
 }
