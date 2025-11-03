@@ -1,9 +1,11 @@
 import YourFirstComponent from "./your-first-component/page";
+import PassingProps from "./passing-props/page";
 
 export default function Home() {
   return (
     <div className="container mx-auto p-4">
       <YourFirstComponent />
+      <PassingProps />
     </div>
   );
 }

@@ -4,7 +4,7 @@ import ToDoList from "../components/to-do-list";
 
 export default function YourFirstComponent() {
   return (
-    <>
+    <div className="container mx-auto p-4">
       <h1 className="mb-2">Amazing scientists</h1>
       <Gallery />
       <br/>
@@ -13,6 +13,6 @@ export default function YourFirstComponent() {
       <br/>
       <h1 className="mb-2">To Do List</h1>
       <ToDoList />
-    </>
+    </div>
   );
 }
