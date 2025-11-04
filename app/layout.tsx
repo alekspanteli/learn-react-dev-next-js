@@ -16,7 +16,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.className} antialiased`}
       >
-        {children}
+        <div className="container mx-auto p-4">
+          {children}
+        </div>
       </body>
     </html>
   );
