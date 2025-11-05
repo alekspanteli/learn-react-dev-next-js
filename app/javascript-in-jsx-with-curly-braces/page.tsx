@@ -26,6 +26,28 @@ function TodoList() {
   );
 }
 
+function MyStuff() {
+    const name = "John Doe";
+    const age = 30;
+    const isLoggedIn = true;
+
+    const user = {
+        name: "John Doe",
+        theme: {
+            backgroundColor: "lightgray",
+            padding: "10px",
+            borderRadius: "5px",
+        },
+    };
+  return (
+    <div style={user.theme}>
+      <h2>{user.name}</h2>
+      <p>{isLoggedIn ? "Logged in" : "Logged out"}</p>
+      <p>{2 + 2}</p>
+    </div>
+  );
+}
+
 export default function JavaScriptInJSXWithCurlyBraces() {
   const name = "John Doe";
   const description = "This is a description of the image";
@@ -40,6 +62,7 @@ export default function JavaScriptInJSXWithCurlyBraces() {
       <p>{formatDate(new Date())}</p>
       <br />
       <TodoList />
+      <MyStuff/>
       <br />
     </>
   );
