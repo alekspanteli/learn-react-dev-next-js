@@ -27,8 +27,6 @@ function TodoList() {
 }
 
 function MyStuff() {
-    const name = "John Doe";
-    const age = 30;
     const isLoggedIn = true;
 
     const user = {
