@@ -6,6 +6,8 @@
 //   'Subrahmanyan Chandrasekhar: astrophysicist',
 // ];
 
+import { Fragment } from "react/jsx-runtime";
+
 type Person = {
   id: number;
   name: string;
@@ -41,9 +43,11 @@ export default function RenderingLists() {
   const chemists = people
     .filter((person) => person.description === "chemist")
     .map((person) => (
-      <li key={person.id}>
-        {person.name}: {person.description}
-      </li>
+      <Fragment key={person.id}>
+        <li>
+          {person.name}: {person.description}
+        </li>
+      </Fragment>
     ));
   return <ul>{chemists}</ul>;
 }
