@@ -10,7 +10,7 @@ function Profile(props: AvatarProps) {
 
 function Card({children}: {children: React.ReactNode}){
   return (
-    <div className="border rounded-xl p-4">
+    <div className="border rounded-xl p-4 w-fit">
       {children}
     </div>
   );
