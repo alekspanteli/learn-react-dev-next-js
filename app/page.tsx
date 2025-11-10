@@ -1,7 +1,9 @@
 export default function Home() {
+  const email = "test@test.com";
   return (
-    <div>
-      <h1>Hello World</h1>
-    </div>
+    <>
+      <p>Email: {email.replace("@", "[at]")}</p>
+      <input type="text" placeholder="Enter your email" required={true} />
+    </>
   );
 }
