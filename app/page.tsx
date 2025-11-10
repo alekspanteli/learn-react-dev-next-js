@@ -1,37 +1,63 @@
 "use client";
 
-import React from "react";
+import Image from "next/image";
 
-type BadgeProps = {
-  status: Status;
-  children: React.ReactNode;
+type AvatarProps = {
+  src: string;
+  alt: string;
+  size: number;
 };
 
-const statuses = {
-  success: "bg-green-500",
-  error: "bg-red-500",
-  warning: "bg-yellow-500",
-  info: "bg-blue-500",
-};
-
-type Status = keyof typeof statuses;
-
-function Badge({ status, children }: BadgeProps) {
+function Avatar({ src, alt, size }: AvatarProps) {
   return (
-    <span className={`px-2 py-1 rounded-md ${statuses[status]}`}>
-      {children}
-    </span>
+    <Image
+      src={src}
+      alt={alt}
+      width={size}
+      height={size}
+      className="rounded-full object-cover"
+    />
   );
 }
 
+const avatars = [
+  {
+    src: "https://placehold.co/64x64/png",
+    alt: "64 pixel placeholder avatar",
+    size: 64,
+  },
+  {
+    src: "https://placehold.co/96x96/png",
+    alt: "96 pixel placeholder avatar",
+    size: 96,
+  },
+  {
+    src: "https://placehold.co/120x120/png",
+    alt: "120 pixel placeholder avatar",
+    size: 120,
+  },
+  {
+    src: "https://placehold.co/80x80/png",
+    alt: "80 pixel placeholder avatar",
+    size: 80,
+  },
+  {
+    src: "https://placehold.co/160x160/png",
+    alt: "160 pixel placeholder avatar",
+    size: 160,
+  },
+];
+
 export default function Home() {
-  const statusesList = Object.keys(statuses) as Status[];
   return (
     <>
-      {statusesList.map((status) => (
-        <React.Fragment key={status}>
-          <Badge status={status}>{status}</Badge>
-        </React.Fragment>
+      {avatars.map((avatar, index) => (
+        <Avatar
+          key={index}
+          src={avatar.src}
+          alt={avatar.alt}
+          size={avatar.size}
+        />
       ))}
     </>
   );
