@@ -1,5 +1,23 @@
 "use client";
 
+const contacts = [
+  {
+    name: "John Doe 1",
+    job: "Software Engineer",
+    email: "john.doe1@example.com",
+  },
+  {
+    name: "Jane Doe 2",
+    job: "Software Engineer 2",
+    email: "jane.doe2@example.com",
+  },
+  {
+    name: "Jim Doe 3",
+    job: "Software Engineer 3",
+    email: "jim.doe3@example.com",
+  },
+];
+
 type ContactCardProps = {
   name: string;
   job: string;
@@ -44,21 +62,18 @@ function Button({ color, children, onClick }: ButtonProps) {
 export default function Home() {
   return (
     <>
-      <ContactCard
-        name="John Doe"
-        job="Software Engineer"
-        email="john.doe@example.com"
-      />
-      <ContactCard
-        name="Jane Doe"
-        job="Software Engineer"
-        email="jane.doe@example.com"
-      />
-      <ContactCard
-        name="Jim Doe"
-        job="Software Engineer"
-        email="jim.doe@example.com"
-      />
+      
+      <ul className="grid gap-4">
+      {contacts
+      .filter((contact) => contact.job === "Software Engineer")
+      .map((contact, index) => (
+        <li key={index} className={`${contact.job === "Software Engineer" ? "bg-red-500" : ""}`}>
+          <ContactCard name={contact.name} job={contact.job} email={contact.email} />
+        </li>
+      ))}
+      </ul>
+
+      <br />
 
       <Button color="red" onClick={() => alert("Red button clicked")}>
         Click me
