@@ -1,64 +1,69 @@
 "use client";
 
-import Image from "next/image";
-
-type AvatarProps = {
-  src: string;
-  alt: string;
-  size: number;
-};
-
-function Avatar({ src, alt, size }: AvatarProps) {
-  return (
-    <Image
-      src={src}
-      alt={alt}
-      width={size}
-      height={size}
-      className="rounded-full object-cover"
-    />
-  );
-}
-
-const avatars = [
+const items = [
   {
-    src: "https://placehold.co/64x64/png",
-    alt: "64 pixel placeholder avatar",
-    size: 64,
+    name: "Item 1",
+    description: "Description 1",
+    inStock: true,
   },
   {
-    src: "https://placehold.co/96x96/png",
-    alt: "96 pixel placeholder avatar",
-    size: 96,
+    name: "Item 2",
+    description: "Description 2",
+    inStock: false,
   },
   {
-    src: "https://placehold.co/120x120/png",
-    alt: "120 pixel placeholder avatar",
-    size: 120,
-  },
-  {
-    src: "https://placehold.co/80x80/png",
-    alt: "80 pixel placeholder avatar",
-    size: 80,
-  },
-  {
-    src: "https://placehold.co/160x160/png",
-    alt: "160 pixel placeholder avatar",
-    size: 160,
+    name: "Item 3",
+    description: "Description 3",
+    inStock: true,
+    id: 3,
   },
 ];
 
+// Intresting
+
+// When we write ArrayType[number] in TypeScript, it means:
+// "Give me the type of any element in this array."
+
+type Item = (typeof items)[number];
+
+type TableProps = {
+  items: Item[];
+};
+
+function CardTable({ items }: TableProps) {
+  return (
+    <table>
+      <tbody>
+        {items.map((item, index) => (
+          <tr key={index}>
+            <td>{item.name}</td>
+            <td>{item.description}</td>
+            <td>{item.inStock ? "Yes" : "No"}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}
+
 export default function Home() {
+  const itemsInStock = items.filter((item) => item.inStock);
+  const itemsOutOfStock = items.filter((item) => !item.inStock);
+
   return (
     <>
-      {avatars.map((avatar, index) => (
-        <Avatar
-          key={index}
-          src={avatar.src}
-          alt={avatar.alt}
-          size={avatar.size}
-        />
-      ))}
+      <h1>Items out of stock</h1>
+      {items.length > 0 ? (
+        <CardTable items={itemsOutOfStock} />
+      ) : (
+        <p>No items out of stock</p>
+      )}
+      <h1>Items in stock</h1>
+      {items.length > 0 ? (
+        <CardTable items={itemsInStock} />
+      ) : (
+        <p>No items in stock</p>
+      )}
     </>
   );
 }
