@@ -1,69 +1,39 @@
 "use client";
 
-const items = [
-  {
-    name: "Item 1",
-    description: "Description 1",
-    inStock: true,
-  },
-  {
-    name: "Item 2",
-    description: "Description 2",
-    inStock: false,
-  },
-  {
-    name: "Item 3",
-    description: "Description 3",
-    inStock: true,
-    id: 3,
-  },
-];
+type FriendProps = {
+  name: string;
+  isOnline: boolean;
+}
 
-// Intresting
+function Friend({name, isOnline}: FriendProps) {
+  let prefix;
 
-// When we write ArrayType[number] in TypeScript, it means:
-// "Give me the type of any element in this array."
+  if (isOnline) {
+    prefix = <div className="w-2 h-2 bg-green-500 rounded-full"></div>;
+  }
 
-type Item = (typeof items)[number];
-
-type TableProps = {
-  items: Item[];
-};
-
-function CardTable({ items }: TableProps) {
   return (
-    <table>
-      <tbody>
-        {items.map((item, index) => (
-          <tr key={index}>
-            <td>{item.name}</td>
-            <td>{item.description}</td>
-            <td>{item.inStock ? "Yes" : "No"}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <ul>
+      <li className="flex items-center gap-2">
+        {prefix}
+        {name}
+      </li>
+    </ul>
   );
 }
 
+
 export default function Home() {
-  const itemsInStock = items.filter((item) => item.inStock);
-  const itemsOutOfStock = items.filter((item) => !item.inStock);
+ 
 
   return (
     <>
-      <h1>Items out of stock</h1>
-      {items.length > 0 ? (
-        <CardTable items={itemsOutOfStock} />
-      ) : (
-        <p>No items out of stock</p>
-      )}
-      <h1>Items in stock</h1>
-      {items.length > 0 ? (
-        <CardTable items={itemsInStock} />
-      ) : (
-        <p>No items in stock</p>
-      )}
+     <Friend name="John" isOnline={true} />
+     <Friend name="Jane" isOnline={false} />
+     <Friend name="Jim" isOnline={true} />
+     <Friend name="Jill" isOnline={false} />
+     <Friend name="Jack" isOnline={true} />
+     <Friend name="Jill" isOnline={false} />
     </>
   );
 }
