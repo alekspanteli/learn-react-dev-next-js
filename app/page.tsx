@@ -1,23 +1,24 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { FormEvent } from "react";
 
 export default function Home() {
-  const [value, setValue] = useState("");
 
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setValue(e.target.value);
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const username = formData.get("username") as string;
+    console.log(username);
+    e.currentTarget.reset();
+    
   }
 
   return (
     <>
-      <input
-        className="border border-gray-300 rounded-md p-2"
-        type="text"
-        value={value}
-        onChange={handleChange}
-      />
-      <p>You typed: {value}</p>
+      <form onSubmit={handleSubmit}>
+        <input className="border border-gray-300 rounded-md p-2" type="text" name="username" />
+        <button type="submit">Submit</button>
+      </form>
     </>
   );
 }
