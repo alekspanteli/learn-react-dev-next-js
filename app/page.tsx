@@ -1,23 +1,25 @@
 "use client";
 
-function clickBallGame(type: "win" | "lose") {
-   if (type === "win") {
-    console.log("You win!");
-   } else {
-    console.log("You lose!");
-   }
-}
+import { useState } from "react";
 
 export default function Home() {
+  function expensiveComputation() {
+    console.log('Running expensive computation');
+    return 42;
+  }
+
+  // const [num1, setNum1] = useState(expensiveComputation());
+  const [num1, setNum1] = useState(expensiveComputation());
+
+  const [count, setCount] = useState(0);
+
+
+  
+
   return (
     <>
-      <button onClick={() => clickBallGame("win")}>
-        Win
-      </button>
-      <button onClick={() => clickBallGame("lose")}>
-        Lose
-      </button>
+      {num1} {count}
+      <button onClick={() => setCount(count + 1)}>Increment</button>
     </>
   );
 }
-  
