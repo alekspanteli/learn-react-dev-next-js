@@ -1,20 +1,23 @@
 "use client";
 
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 
 export default function Home() {
-  const [count, setCount] = useState(0);
+  const [value, setValue] = useState("");
 
-  function handleClick() {
-    const newCount = count + 1;
-    setCount(newCount);
-    console.log(newCount);
+  function handleChange(e: ChangeEvent<HTMLInputElement>) {
+    setValue(e.target.value);
   }
 
   return (
     <>
-      <p>You clicked {count} times</p>
-      <button onClick={handleClick}>Increment</button>
+      <input
+        className="border border-gray-300 rounded-md p-2"
+        type="text"
+        value={value}
+        onChange={handleChange}
+      />
+      <p>You typed: {value}</p>
     </>
   );
 }
