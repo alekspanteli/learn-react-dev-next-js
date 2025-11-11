@@ -2,46 +2,54 @@
 
 import { useState } from "react";
 
-const buttonVariants = {
-  primary: "bg-blue-500 text-white p-2 rounded-md",
-  secondary: "bg-gray-500 text-white p-2 rounded-md",
+type SearchFormProps = {
+  searchQuery: string;
+  setSearchQuery: (value: string) => void;
 };
 
-type ButtonProps = {
-  children: React.ReactNode;
-  isEnabled?: boolean;
-  variant?: "primary" | "secondary";
-};
-
-function Button({ isEnabled, children, variant = "primary" }: ButtonProps) {
+function SearchForm({ searchQuery, setSearchQuery }: SearchFormProps) {
+  function runSearch(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+  }
   return (
-    <button
-      disabled={!isEnabled}
-      className={`${buttonVariants[variant]} ${!isEnabled ? "opacity-50 cursor-not-allowed" : ""}`}
-    >
-      {children}
-    </button>
+    <form onSubmit={runSearch}>
+      <input
+        className="border border-gray-300 rounded-md p-2"
+        type="text"
+        placeholder="Search"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+      />
+      <button
+        type="submit"
+        className="bg-blue-500 text-white p-2 rounded-md cursor-pointer"
+      >
+        Search
+      </button>
+    </form>
+  );
+}
+
+function SearchResults({ searchQuery }: { searchQuery: string }) {
+  return (
+    <div>
+      <h2>Your search for: {searchQuery}.</h2>
+    </div>
   );
 }
 
 export default function Home() {
-  const [hasAgreed, setHasAgreed] = useState(false);
-
-  function handleAgree() {
-    setHasAgreed(!hasAgreed);
-  }
+  const [searchQuery, setSearchQuery] = useState("");
 
   return (
     <>
-      <h1>Terms of Service</h1>
-      <p>By clicking the button below, you agree to our terms of service.</p>
-      <label className="flex gap-2">
-        <input type="checkbox" checked={hasAgreed} onChange={handleAgree} />
-        I agree to the terms of service
-      </label>  
-      <br />
-      <Button variant="secondary">Agree</Button>
-      <Button isEnabled={hasAgreed}>Agree</Button>
+      <header>
+        <a href="">My stuff</a>
+        <SearchForm searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      </header>
+      <main>
+        <SearchResults searchQuery={searchQuery} />
+      </main>
     </>
   );
 }
