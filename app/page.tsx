@@ -4,26 +4,23 @@ import { useEffect, useRef, useState } from "react";
 
 function Toasty() {
   const [isShown, setIsShown] = useState(false);
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    const node = wrapperRef.current;
-    if (!node) {
+    const element = wrapperRef.current;
+
+    if (!element) {
       return;
     }
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setIsShown(true);
-        }
-      });
+    const observer = new IntersectionObserver(([entry]) => {
+      setIsShown(entry.isIntersecting);
     });
 
-    observer.observe(node);
+    observer.observe(element);
 
     return () => {
-      observer.unobserve(node);
+      observer.unobserve(element);
       observer.disconnect();
     };
   }, []);
@@ -42,9 +39,6 @@ function Toasty() {
 }
 
 export default function Home() {
-
-  
-
   return (
     <div className="h-[200vh] p-10">
       <h1 className="text-3xl mb-96">Scroll down to see the ghost!</h1>
