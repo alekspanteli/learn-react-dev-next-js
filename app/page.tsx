@@ -1,18 +1,22 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const inputRef = useRef<HTMLInputElement>(null);
 
-  function handleFocus() {
-    inputRef.current?.focus();
-  }
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `Count: ${count}`;
+    const interval = setInterval(() => {
+      setCount(count + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [count]);
 
   return (
-    <>
-      <input type="text" placeholder="Enter your name" ref={inputRef} />
-      <button onClick={handleFocus}>Focus Username</button>
-    </>
+    <div>
+      <p>Count: {count}</p>
+    </div>
   );
 }
