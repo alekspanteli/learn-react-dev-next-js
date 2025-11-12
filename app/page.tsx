@@ -2,21 +2,55 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export default function Home() {
-
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+function Toasty() {
+  const [isShown, setIsShown] = useState(false);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleMouseMove = (event: MouseEvent) => {
-      setMousePosition({ x: event.clientX, y: event.clientY });
+    const node = wrapperRef.current;
+    if (!node) {
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setIsShown(true);
+        }
+      });
+    });
+
+    observer.observe(node);
+
+    return () => {
+      observer.unobserve(node);
+      observer.disconnect();
     };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  const translateXClass = isShown ? "translate-x-0" : "translate-x-full";
+
   return (
-    <div>
-      <p>Mouse position: {mousePosition.x}, {mousePosition.y}</p>
+    <div ref={wrapperRef} className="relative h-48 overflow-hidden my-20">
+      <div
+        className={`absolute right-0 top-1/2 -translate-y-1/2 text-4xl transition-transform duration-500 ease-in-out ${translateXClass}`}
+      >
+        👻
+      </div>
+    </div>
+  );
+}
+
+export default function Home() {
+
+  
+
+  return (
+    <div className="h-[200vh] p-10">
+      <h1 className="text-3xl mb-96">Scroll down to see the ghost!</h1>
+      <div className="mt-[150vh]">
+        <Toasty />
+      </div>
     </div>
   );
 }
