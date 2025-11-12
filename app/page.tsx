@@ -1,22 +1,22 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
 
-  const [count, setCount] = useState(0);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
-    document.title = `Count: ${count}`;
-    const interval = setInterval(() => {
-      setCount(count + 1);
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [count]);
+    const handleMouseMove = (event: MouseEvent) => {
+      setMousePosition({ x: event.clientX, y: event.clientY });
+    };
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, []);
 
   return (
     <div>
-      <p>Count: {count}</p>
+      <p>Mouse position: {mousePosition.x}, {mousePosition.y}</p>
     </div>
   );
 }
